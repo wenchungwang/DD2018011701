@@ -18,13 +18,21 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 //    final public static StudentScoreDAO dao = new StudentScoreDAO();
-    public static StudentFileDAO dao;
+//    public static StudentFileDAO dao;     //for old method
+    public static StudentDAO dao;
+//    int dbType;
+    DBtype dbType;
     ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dao = new StudentFileDAO(this);
+//        dao = new StudentFileDAO(this);   //for old method
+      dbType =DBtype.FILE;
+//        dbType = 1; // 1:記憶體 2:檔案
+        dao = StudentDAOFactory.getDAOInstance(this, dbType);
+
+
     }
 
     @Override

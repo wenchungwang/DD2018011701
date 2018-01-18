@@ -10,7 +10,7 @@ import java.util.regex.Pattern;  //?? check thomas wang 20180117
  * Created by Student on 2018/1/17.
  */
 
-public class StudentScoreDAO {
+public class StudentScoreDAO implements StudentDAO {
     public ArrayList<Student> mylist;
     public StudentScoreDAO()
     {
