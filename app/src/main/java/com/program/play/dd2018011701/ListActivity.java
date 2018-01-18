@@ -14,6 +14,7 @@ public class ListActivity extends AppCompatActivity {
     Student s;
     TextView tv1, tv2, tv3;
     int id;
+    boolean Fastback=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +37,18 @@ public class ListActivity extends AppCompatActivity {
         tv1.setText(String.valueOf(s.id));
         tv2.setText(s.name);
         tv3.setText(String.valueOf(s.score));
+
+        if(Fastback)
+        {
+            finish();
+        }
+
     }
 
     public void clickedit(View v)
     {
         Intent it = new Intent(ListActivity.this, EditActivity.class);
+        Fastback =true;
         it.putExtra("id",id);
         startActivity(it);
     }

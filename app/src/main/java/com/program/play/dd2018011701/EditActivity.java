@@ -49,11 +49,11 @@ public class EditActivity extends AppCompatActivity {
     {
         Student s = new Student(id, ed4.getText().toString(), Integer.valueOf(ed5.getText().toString()));
         MainActivity.dao.update(s);
-
+/*
         Intent it = new Intent(EditActivity.this, MainActivity.class);
         it.putExtra("id",id);
         startActivity(it);
-
+*/
         finish();
     }
 
