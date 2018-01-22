@@ -5,5 +5,5 @@ package com.program.play.dd2018011701;
  */
 
 public enum DBtype {
-    MEMORY,FILE
+    MEMORY,FILE,DB
 }
