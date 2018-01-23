@@ -23,21 +23,36 @@ public class MainActivity extends AppCompatActivity {
 //    int dbType;
     DBtype dbType;
     ListView lv;
+    ArrayList<String> studentNames; //
+    ArrayAdapter<String> adapter;   //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        dao = new StudentFileDAO(this);   //for old method
-      dbType =DBtype.DB;        //thomas 20180122 modify "FILE" to "DB'
+      dbType =DBtype.CLOUD;        //thomas 20180122 modify "FILE" to "DB'
 //        dbType = 1; // 1:記憶體 2:檔案
         dao = StudentDAOFactory.getDAOInstance(this, dbType);
-
+        studentNames = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_list_item_1, studentNames);
+        lv = (ListView) findViewById(R.id.listView);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent it = new Intent(MainActivity.this, ListActivity.class);
+                it.putExtra("id", dao.getList().get(position).id);
+                startActivity(it);
+            }
+        });
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+/*
         lv = (ListView) findViewById(R.id.listView);
         ArrayList<String> studentNames = new ArrayList<>();
         for (Student s : dao.getList())
@@ -55,9 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+*/
+    refreshData();  //
+
 
     }
-
+    public void refreshData()
+    {
+        studentNames.clear();
+        for (Student s : dao.getList())
+        {
+            studentNames.add(s.name);
+        }
+        adapter.notifyDataSetChanged();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);

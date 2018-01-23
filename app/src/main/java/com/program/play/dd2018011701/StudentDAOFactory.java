@@ -17,6 +17,9 @@ public class StudentDAOFactory {
                 return new StudentFileDAO(context);
             case DB:
                 return new StudentDAODBImpl(context);
+            case CLOUD:
+                return new StudentCloudDAO(context);
+
         }
         return null;
     }
